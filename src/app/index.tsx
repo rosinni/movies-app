@@ -1,15 +1,16 @@
 import React from 'react';
+import { Button } from 'react-native';
 import Screen from '@/components/ui/Screen';
-import BrandHeader from '@/components/ui/BrandHeader';
-import logo from "../../assets/logo.png"
+import { useRouter } from "expo-router";
 
 export default function Home() {
+
+  const router = useRouter()
+
   return (
     <Screen>
-      <BrandHeader
-        title="Mi App"
-        subtitle="Bienvenido"
-        logo={logo} />
+      <Button title='Movies' onPress={()=>router.push("/movies/index")}/>
+      <Button title='Categories'/>
     </Screen>
   );
 }

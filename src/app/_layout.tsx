@@ -7,6 +7,8 @@ export default function Layout() {
     <SafeAreaProvider>
       <Stack screenOptions={{ headerShown: true }}>
         <Stack.Screen name="index" options={{ title: 'Home' }} />
+        <Stack.Screen name="movies/index" options={{ title: 'Movies' }} />
+        <Stack.Screen name="movies/[id]" options={{ title: 'Movie Details' }} />
       </Stack>
     </SafeAreaProvider>
   );
