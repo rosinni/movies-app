@@ -3,18 +3,25 @@ import { useRouter } from "expo-router";
 import { View, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-function CardMovie() {
+type Props = {
+    name: string,
+    gender: string,
+    id: number
+}
+
+function CardMovie({name,gender, id}:Props) {
     const router = useRouter()
+
 
     return (
         <View style={styles.card}>
             <View style={styles.info}>
-                <Text style={styles.title}>The Silent Code</Text>
+                <Text style={styles.title}>{name}</Text>
                 <Text style={styles.year}>2025</Text>
-                <Text style={styles.genre}>Drama, Thriller</Text>
+                <Text style={styles.genre}>{gender}</Text>
             </View>
 
-            <Ionicons name="chevron-forward" size={20} color="#999" onPress={()=>router.push("/movies/1")}/>
+            <Ionicons name="chevron-forward" size={20} color="#999" onPress={()=>router.push(`/movies/${id}`)}/>
         </View>
     )
 }
