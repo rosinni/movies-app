@@ -2,25 +2,33 @@ import React, {useEffect,useState} from "react";
 import {Text,View, FlatList} from "react-native"
 import CardMovie from "@/components/ui/CardMovie";
 import { fetchResults } from "@/services/api.client.placeholder";
+import {supabase} from "@/lib/supabase"//importar la conexion con la base de datos del archivo supabase.ts
 
 
 
 function MoviesScreen() {
 
-    const [characters,setCharacters]= useState<{name: string; gender: string, id: number}[]>([])
+    const [movies,setMovies]= useState<{nombre: string, id: number}[]>([])
 
 
     async function handleState() {
-        let data = await fetchResults("character")
-        if (!data.ok) {
-            setCharacters(data);
-        }
-        console.log("error",data);
+       const {data,error}= await supabase.from("movies").select("*")
+
+       if (error) {
+           console.log("error", error);
+           return;
+       }
+
+       if (data) {
+       
         
+        setMovies(data);
         
-        
+        //    setCharacters(data);
+       }
     }
    
+console.log(movies);
 
     useEffect(()=>{
         //el codigo que queremos que se ejecute ni bien carga el componente
@@ -31,8 +39,8 @@ function MoviesScreen() {
     return(
         <View>
             <FlatList
-            data={characters}
-            renderItem={({item})=><CardMovie name={item.name} gender="test" id={item.id}/>}/>
+            data={movies}
+            renderItem={({item})=><CardMovie name={item.nombre} gender="test" id={item.id}/>}/>
         </View>
     )
 }
